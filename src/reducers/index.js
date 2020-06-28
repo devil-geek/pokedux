@@ -1,4 +1,4 @@
 import { combineReducers } from "redux";
-import dummy from "./dummy-reducer";
+import pokemons from "./pokemons-reducer";
 
-export default combineReducers({ dummy });
+export default combineReducers({ pokemons });

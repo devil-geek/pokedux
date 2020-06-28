@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Router } from "@reach/router";
 import { Provider } from "react-redux";
 import store from "./store";
-import DummyContainer from "./containers/DummyContainer";
+import Pokemons from "./components/Pokemons";
 
 const NotFound = () => (
   <div>
@@ -11,21 +11,11 @@ const NotFound = () => (
   </div>
 );
 
-const Dashboard = (props) => (
-  <div>
-    <h2>Dashboard</h2>
-    <pre>
-      <code>{JSON.stringify(props, null, 4)}</code>
-    </pre>
-  </div>
-);
-
 const App = () => {
   return (
     <React.StrictMode>
       <Router>
-        <DummyContainer path="/" />
-        <Dashboard path="/dashboard" />
+        <Pokemons path="/" />
         <NotFound default />
       </Router>
     </React.StrictMode>
