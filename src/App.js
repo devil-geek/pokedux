@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { Router } from "@reach/router";
 import { Provider } from "react-redux";
 import store from "./store";
-import Pokemons from "./components/Pokemons";
+import Pokedex from "./components/Pokedex";
 
 const NotFound = () => (
   <div>
@@ -15,7 +15,7 @@ const App = () => {
   return (
     <React.StrictMode>
       <Router>
-        <Pokemons path="/" />
+        <Pokedex path="/" />
         <NotFound default />
       </Router>
     </React.StrictMode>

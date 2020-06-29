@@ -1,12 +1,16 @@
-import { GET_POKEMONS } from "../actions/pokemons-action";
+import { GET_POKEMONS } from "../actions/actionTypes";
 
-const pokemons = (state = [], action) => {
-  switch (action.type) {
-    case GET_POKEMONS:
-      return action.payload.pokemons;
-    default:
-      return state;
+const pokemons = (pokemons = {}, action) => {
+  if (action.type === GET_POKEMONS) {
+    return {
+      ...pokemons,
+      ...action.payload.pokemons.reduce((pokemons, currentPokemon) => {
+        pokemons[currentPokemon.name] = currentPokemon;
+        return pokemons;
+      }, {}),
+    };
   }
+  return pokemons;
 };
 
 export default pokemons;

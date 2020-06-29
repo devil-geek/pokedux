@@ -3,7 +3,12 @@ import thunk from "redux-thunk";
 import reducer from "./reducers";
 
 const initialState = {
-  pokemons: [],
+  pokemons: {},
+  pagination: {
+    pages: {},
+    currentPage: 0,
+    numPages: 0,
+  },
 };
 
 const store = createStore(
