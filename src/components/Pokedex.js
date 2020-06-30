@@ -1,44 +1,14 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React from "react";
 import { css } from "emotion";
-import { getPokemons } from "../actions/pokemons-action";
 import Pokemons from "./Pokemons";
-import { setCurrentPage } from "../actions/pagination-action";
 import Leds from "./Leds";
+import Pagination from "./Pagination";
 
 const Pokedex = () => {
-  const pages = useSelector((state) => state.pagination.pages);
-  const currentPage = useSelector((state) => state.pagination.currentPage);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getPokemons());
-    dispatch({ type: "EVENTO" });
-  }, [dispatch]);
-
-  const nextPage = () => {
-    const nextPage = currentPage + 1;
-    if (pages[nextPage]) {
-      dispatch(setCurrentPage(nextPage));
-    } else {
-      dispatch(getPokemons());
-    }
-  };
-
-  const prevPage = () => {
-    const prevPage = currentPage - 1;
-    if (pages[prevPage]) {
-      dispatch(setCurrentPage(prevPage));
-    } else {
-      return;
-    }
-  };
-
   return (
     <div
       className={css`
         background-color: #f44336;
-        font-size: 24px;
         min-height: calc(100vh - 20px);
         max-width: 1000px;
         margin: 10px auto;
@@ -70,42 +40,9 @@ const Pokedex = () => {
             box-shadow: inset 0 0 6px #2d2d2d;
           `}
         >
-          <Pokemons pokemonList={pages[currentPage] || []} />
+          <Pokemons />
         </div>
-        <div
-          className={css`
-            float: right;
-            margin: 0 60px;
-          `}
-        >
-          <div
-            className={css`
-              height: 5px;
-              width: 100px;
-              background: #2d2d2d;
-              margin-bottom: 5px;
-            `}
-          />
-          <div
-            className={css`
-              height: 5px;
-              width: 100px;
-              background: #2d2d2d;
-              margin-bottom: 5px;
-            `}
-          />
-          <div
-            className={css`
-              height: 5px;
-              width: 100px;
-              background: #2d2d2d;
-              margin-bottom: 5px;
-            `}
-          />
-          <span>currentPage: {currentPage}</span>
-          <button onClick={nextPage}>Next</button>
-          <button onClick={prevPage}>Prev</button>
-        </div>
+        <Pagination />
       </div>
     </div>
   );

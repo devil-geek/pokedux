@@ -6,7 +6,6 @@ const grid = css`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   grid-auto-rows: 1fr;
-  font-family: "Press Start 2P", cursive;
   font-size: 0.7rem;
   padding: 10px;
   &::before {
@@ -40,8 +39,11 @@ const grid = css`
   }
 `;
 
-const Pokemons = ({ pokemonList }) => {
+const Pokemons = () => {
   const pokemons = useSelector((state) => state.pokemons);
+  const pages = useSelector((state) => state.pagination.pages);
+  const currentPage = useSelector((state) => state.pagination.currentPage);
+  const pokemonList = pages[currentPage] || [];
   return (
     <div>
       <div className={grid}>

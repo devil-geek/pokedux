@@ -24,6 +24,7 @@ const App = () => {
             padding: 0;
             margin: 0;
             background: #1d2225;
+            font-family: "Press Start 2P", cursive;
           }
         `}
       />
