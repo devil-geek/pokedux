@@ -5,7 +5,11 @@ const pokemons = (pokemons = {}, action) => {
     return {
       ...pokemons,
       ...action.payload.pokemons.reduce((pokemons, currentPokemon) => {
-        pokemons[currentPokemon.name] = currentPokemon;
+        const id = currentPokemon.url.split("/");
+        pokemons[currentPokemon.name] = {
+          ...currentPokemon,
+          img: `https://pokeres.bastionbot.org/images/pokemon/${id[6]}.png`,
+        };
         return pokemons;
       }, {}),
     };

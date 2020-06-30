@@ -2,6 +2,7 @@ import React from "react";
 import { render } from "react-dom";
 import { Router } from "@reach/router";
 import { Provider } from "react-redux";
+import { Global, css } from "@emotion/core";
 import store from "./store";
 import Pokedex from "./components/Pokedex";
 
@@ -14,6 +15,18 @@ const NotFound = () => (
 const App = () => {
   return (
     <React.StrictMode>
+      <Global
+        styles={css`
+          * {
+            box-sizing: border-box;
+          }
+          body {
+            padding: 0;
+            margin: 0;
+            background: #1d2225;
+          }
+        `}
+      />
       <Router>
         <Pokedex path="/" />
         <NotFound default />
