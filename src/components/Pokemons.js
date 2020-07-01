@@ -1,13 +1,16 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { css } from "emotion";
+import { navigate } from "@reach/router";
+import { getPokemonDetails } from "../actions/pokemons-action";
 
 const grid = css`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
   grid-auto-rows: 1fr;
   font-size: 0.7rem;
-  padding: 10px;
+  padding: 15px 10px;
+
   &::before {
     content: "";
     width: 0;
@@ -22,12 +25,15 @@ const grid = css`
   }
 
   .item {
-    padding: 16px;
+    padding: 10px;
     margin: 2px;
-    border-radius: 3px;
+    border-radius: 5px;
     background: #32383c;
     text-align: center;
     cursor: pointer;
+    font-family: "Press Start 2P", cursive;
+    font-size: 0.65rem;
+    border: none;
     img {
       width: 100%;
       margin: 0 auto;
@@ -44,15 +50,28 @@ const Pokemons = () => {
   const pages = useSelector((state) => state.pagination.pages);
   const currentPage = useSelector((state) => state.pagination.currentPage);
   const pokemonList = pages[currentPage] || [];
+  const dispatch = useDispatch();
+
+  const toDetails = (id) => {
+    if (!pokemons[id].details) {
+      dispatch(getPokemonDetails(id));
+    }
+    navigate(`/${pokemons[id].name}`);
+  };
+
   return (
     <div>
       <div className={grid}>
         {pokemonList.map((pokemon) => {
           return (
-            <div className="item" key={pokemon}>
+            <button
+              onClick={() => toDetails(pokemons[pokemon].name)}
+              className="item"
+              key={pokemon}
+            >
               <img src={pokemons[pokemon].img} alt={pokemons[pokemon].name} />
               <p>{pokemons[pokemon].name}</p>
-            </div>
+            </button>
           );
         })}
       </div>

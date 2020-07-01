@@ -48,8 +48,10 @@ const Pagination = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getPokemons());
-  }, [dispatch]);
+    if (Object.keys(pages).length === 0) {
+      dispatch(getPokemons());
+    }
+  }, [dispatch, pages]);
 
   const nextPage = () => {
     const nextPage = currentPage + 1;

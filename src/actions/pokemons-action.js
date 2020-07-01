@@ -1,4 +1,4 @@
-import { GET_POKEMONS } from "./actionTypes";
+import { GET_POKEMONS, GET_POKEMON_DETAILS } from "./actionTypes";
 
 export const getPokemons = () => {
   return (dispatch, getState) => {
@@ -18,5 +18,22 @@ export const addPokemons = (pokemons, currentPage, numPages) => {
   return {
     type: GET_POKEMONS,
     payload: { pokemons, currentPage, numPages },
+  };
+};
+
+export const getPokemonDetails = (id) => {
+  return (dispatch) => {
+    fetch(`https://pokeapi.co/api/v2/pokemon/${id}`)
+      .then((response) => response.json())
+      .then((response) => {
+        dispatch(addPokemonDetails(id, response));
+      });
+  };
+};
+
+export const addPokemonDetails = (id, details) => {
+  return {
+    type: GET_POKEMON_DETAILS,
+    payload: { id, details },
   };
 };

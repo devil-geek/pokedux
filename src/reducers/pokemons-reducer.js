@@ -1,4 +1,4 @@
-import { GET_POKEMONS } from "../actions/actionTypes";
+import { GET_POKEMONS, GET_POKEMON_DETAILS } from "../actions/actionTypes";
 
 const pokemons = (pokemons = {}, action) => {
   if (action.type === GET_POKEMONS) {
@@ -12,6 +12,13 @@ const pokemons = (pokemons = {}, action) => {
         };
         return pokemons;
       }, {}),
+    };
+  }
+  if (action.type === GET_POKEMON_DETAILS) {
+    const { id, details } = action.payload;
+    return {
+      ...pokemons,
+      [id]: { ...pokemons[id], details },
     };
   }
   return pokemons;
