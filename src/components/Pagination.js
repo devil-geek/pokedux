@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { css } from "emotion";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../actions/pokemons-action";
-import { setCurrentPage } from "../actions/pagination-action";
+import { prevPage } from "../actions/pagination-action";
 
 const line = css`
   height: 5px;
@@ -53,32 +53,23 @@ const Pagination = () => {
     }
   }, [dispatch, pages]);
 
-  const nextPage = () => {
-    const nextPage = currentPage + 1;
-    if (pages[nextPage]) {
-      dispatch(setCurrentPage(nextPage));
-    } else {
-      dispatch(getPokemons());
-    }
+  const next = () => {
+    dispatch(getPokemons());
   };
 
-  const prevPage = () => {
-    const prevPage = currentPage - 1;
-    if (pages[prevPage]) {
-      dispatch(setCurrentPage(prevPage));
-    } else {
-      return;
-    }
+  const prev = () => {
+    dispatch(prevPage());
   };
+
   return (
     <div className={buttons}>
-      <button disabled={currentPage === 1} onClick={prevPage}>
+      <button disabled={currentPage === 1} onClick={prev}>
         {"<"}
       </button>
       <span>
         Page:{currentPage} of {numPages}
       </span>
-      <button disabled={currentPage === numPages} onClick={nextPage}>
+      <button disabled={currentPage === numPages} onClick={next}>
         {">"}
       </button>
       <div

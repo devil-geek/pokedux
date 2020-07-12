@@ -6,3 +6,13 @@ export const setCurrentPage = (page) => {
     payload: { page },
   };
 };
+
+export const prevPage = () => {
+  return (dispatch, getState) => {
+    const { pagination } = getState();
+    const prevPage = pagination.currentPage - 1;
+    if (pagination.pages[prevPage]) {
+      dispatch(setCurrentPage(prevPage));
+    }
+  };
+};

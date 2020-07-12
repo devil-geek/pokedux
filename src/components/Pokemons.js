@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { css } from "emotion";
 import { navigate } from "@reach/router";
 import { getPokemonDetails } from "../actions/pokemons-action";
+import { getPokemonList } from "../reducers";
 
 const grid = css`
   display: grid;
@@ -47,9 +48,7 @@ const grid = css`
 
 const Pokemons = () => {
   const pokemons = useSelector((state) => state.pokemons);
-  const pages = useSelector((state) => state.pagination.pages);
-  const currentPage = useSelector((state) => state.pagination.currentPage);
-  const pokemonList = pages[currentPage] || [];
+  const pokemonList = useSelector(getPokemonList);
   const dispatch = useDispatch();
 
   const toDetails = (id) => {
