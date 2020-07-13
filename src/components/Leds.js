@@ -6,27 +6,27 @@ const miniLed = "50px";
 const borderRadius = "100px";
 
 const blinkRed = keyframes`
-  from { background-color: #ff7043; }
-    50% { background-color: #d84315; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #d84315 0 -1px 9px, rgba(255, 87, 34, 0.5) 0 2px 0;}
-    to { background-color: #ff7043; }
+  from { background:radial-gradient(#ffb74d, #ff5722) }
+    50% { background: radial-gradient(#ff5722,#d84315); box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #d84315 0 -1px 9px, rgba(255, 87, 34, 0.5) 0 2px 0;}
+    to { background:radial-gradient(#ffb74d, #ff5722) }
 `;
 
 const blinkYellow = keyframes`
-  from { background-color: #ffd54f; }
-    50% { background-color: #ffa000; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #ffa000 0 -1px 9px, #ffd54f 0 2px 0; }
-    to { background-color: #ffd54f; }
+  from { background: radial-gradient(#fff176, #ffc107) }
+    50% { background: radial-gradient(#ffc107, #ffa000); box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #ffa000 0 -1px 9px, #ffd54f 0 2px 0; }
+    to { background: radial-gradient(#fff176, #ffc107) }
 `;
 
 const blinkGreen = keyframes`
-  from { background-color: #4caf50; }
-    50% { background-color: #2e7d32; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #2e7d32 0 -1px 9px, #4caf50 0 2px 0; }
-    to { background-color: #4caf50; }
+  from { background: radial-gradient(#cddc39, #4caf50)}
+    50% { background: radial-gradient(#4caf50, #2e7d32); box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #2e7d32 0 -1px 9px, #4caf50 0 2px 0; }
+    to { background: radial-gradient(#cddc39, #4caf50) }
 `;
 
 const blinkBlue = keyframes`
-  from { background-color: #03a9f4; }
-    50% { background-color: #0277bd; box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #0277bd 0 -1px 9px, #03a9f4 0 2px 0; }
-    to { background-color: #03a9f4; }
+  from { background:radial-gradient(#05fbfb, #03a9f4) }
+    50% { background:radial-gradient(#03a9f4, #0277bd); box-shadow: rgba(0, 0, 0, 0.2) 0 -1px 7px 1px, inset #0277bd 0 -1px 9px, #03a9f4 0 2px 0; }
+    to { background:radial-gradient(#05fbfb, #03a9f4) }
 `;
 const Leds = () => {
   return (

@@ -9,6 +9,8 @@ const initialState = {
     pages: {},
     currentPage: 0,
     numPages: 0,
+    loading: true,
+    limit: 20,
   },
 };
 

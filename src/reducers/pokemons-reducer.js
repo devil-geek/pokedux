@@ -1,4 +1,8 @@
-import { GET_POKEMONS, GET_POKEMON_DETAILS } from "../actions/actionTypes";
+import {
+  GET_POKEMONS,
+  GET_POKEMON_DETAILS,
+  SET_LIMIT,
+} from "../actions/actionTypes";
 
 const pokemons = (pokemons = {}, action) => {
   if (action.type === GET_POKEMONS) {
@@ -9,6 +13,7 @@ const pokemons = (pokemons = {}, action) => {
         pokemons[currentPokemon.name] = {
           ...currentPokemon,
           img: `https://pokeres.bastionbot.org/images/pokemon/${id[6]}.png`,
+          id: id[6],
         };
         return pokemons;
       }, {}),
@@ -20,6 +25,10 @@ const pokemons = (pokemons = {}, action) => {
       ...pokemons,
       [id]: { ...pokemons[id], details },
     };
+  }
+
+  if (action.type === SET_LIMIT) {
+    return {};
   }
   return pokemons;
 };

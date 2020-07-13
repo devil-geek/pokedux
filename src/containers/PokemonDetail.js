@@ -2,6 +2,7 @@ import React from "react";
 import { css } from "emotion";
 import { useSelector } from "react-redux";
 import { Redirect, navigate } from "@reach/router";
+import Loading from "../components/Loading";
 
 const buttons = css`
   font-size: 12px;
@@ -83,20 +84,15 @@ const PokemonDetail = ({ id }) => {
               background: #32383c;
               color: whitesmoke;
               font-weight: normal;
-              line-height: 1.8;
+              line-height: 1.65;
               display: flex;
               align-self: stretch;
+              font-size: 14px;
               span {
                 color: #8bc34a;
               }
               .name {
                 text-transform: capitalize;
-              }
-              .loading {
-                display: flex;
-                flex: 1;
-                align-items: center;
-                justify-content: center;
               }
             `}
           >
@@ -125,9 +121,17 @@ const PokemonDetail = ({ id }) => {
                     .map((ability) => ability.ability.name)
                     .join(", ")}
                 </p>
+                {pokemon.details.stats.map((stat) => {
+                  return (
+                    <p key={stat.stat.name}>
+                      <span>{stat.stat.name}: </span>
+                      {stat["base_stat"]}{" "}
+                    </p>
+                  );
+                })}
               </div>
             )}
-            {!pokemon.details && <span className="loading">Loading...</span>}
+            {!pokemon.details && <Loading text={`Catching ${pokemon.name}`} />}
           </div>
         </div>
       </div>

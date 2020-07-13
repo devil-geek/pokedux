@@ -1,19 +1,21 @@
 import { GET_POKEMONS, GET_POKEMON_DETAILS } from "./actionTypes";
-import { setCurrentPage } from "./pagination-action";
+import { setCurrentPage, isLoading } from "./pagination-action";
 
 export const getPokemons = () => {
   return (dispatch, getState) => {
     const { pokemons, pagination } = getState();
     const size = Object.keys(pokemons).length;
     const nextPage = pagination.currentPage + 1;
-
+    dispatch(isLoading());
     if (pagination.pages[nextPage]) {
       dispatch(setCurrentPage(nextPage));
     } else {
-      fetch(`https://pokeapi.co/api/v2/pokemon?offset=${size}&limit=20`)
+      fetch(
+        `https://pokeapi.co/api/v2/pokemon?offset=${size}&limit=${pagination.limit}`
+      )
         .then((response) => response.json())
         .then((response) => {
-          const numPages = Math.ceil(response.count / 20);
+          const numPages = Math.ceil(response.count / pagination.limit);
           dispatch(addPokemons(response.results, nextPage, numPages));
         });
     }

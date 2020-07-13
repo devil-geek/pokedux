@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { css } from "emotion";
 import { navigate } from "@reach/router";
 import { getPokemonDetails } from "../actions/pokemons-action";
 import { getPokemonList } from "../reducers";
+import Loading from "./Loading";
+import { isLoaded } from "../actions/pagination-action";
 
 const grid = css`
   display: grid;
@@ -46,10 +48,17 @@ const grid = css`
   }
 `;
 
+const hidden = css`
+  display: none;
+`;
+
 const Pokemons = () => {
   const pokemons = useSelector((state) => state.pokemons);
+  const limit = useSelector((state) => state.pagination.limit);
+  const loading = useSelector((state) => state.pagination.loading);
   const pokemonList = useSelector(getPokemonList);
   const dispatch = useDispatch();
+  const [imgsLoaded, setImgsLoaded] = useState(0);
 
   const toDetails = (id) => {
     if (!pokemons[id].details) {
@@ -58,9 +67,19 @@ const Pokemons = () => {
     navigate(`/${pokemons[id].name}`);
   };
 
+  useEffect(() => {
+    if (imgsLoaded === limit) {
+      dispatch(isLoaded());
+      setImgsLoaded(0);
+    }
+  }, [dispatch, imgsLoaded, limit]);
+
   return (
     <div>
-      <div className={grid}>
+      <div className={loading ? "" : hidden}>
+        <Loading />
+      </div>
+      <div className={loading ? hidden : grid}>
         {pokemonList.map((pokemon) => {
           return (
             <button
@@ -68,7 +87,17 @@ const Pokemons = () => {
               className="item"
               key={pokemon}
             >
-              <img src={pokemons[pokemon].img} alt={pokemons[pokemon].name} />
+              <img
+                src={pokemons[pokemon].img}
+                alt={pokemons[pokemon].name}
+                onLoad={() => setImgsLoaded(imgsLoaded + 1)}
+                onError={() => {
+                  pokemons[
+                    pokemon
+                  ].img = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemons[pokemon].id}.png`;
+                  return setImgsLoaded(imgsLoaded + 1);
+                }}
+              />
               <p>{pokemons[pokemon].name}</p>
             </button>
           );

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { css } from "emotion";
 import { useDispatch, useSelector } from "react-redux";
 import { getPokemons } from "../actions/pokemons-action";
-import { prevPage } from "../actions/pagination-action";
+import { prevPage, setLimit } from "../actions/pagination-action";
 
 const line = css`
   height: 5px;
@@ -44,6 +44,7 @@ const buttons = css`
 const Pagination = () => {
   const pages = useSelector((state) => state.pagination.pages);
   const currentPage = useSelector((state) => state.pagination.currentPage);
+  const limit = useSelector((state) => state.pagination.limit);
   const numPages = useSelector((state) => state.pagination.numPages);
   const dispatch = useDispatch();
 
@@ -61,6 +62,10 @@ const Pagination = () => {
     dispatch(prevPage());
   };
 
+  const changeLimit = (e) => {
+    dispatch(setLimit(e.target.value));
+  };
+
   return (
     <div className={buttons}>
       <button disabled={currentPage === 1} onClick={prev}>
@@ -72,6 +77,25 @@ const Pagination = () => {
       <button disabled={currentPage === numPages} onClick={next}>
         {">"}
       </button>
+      <select
+        className={css`
+          border-radius: 3px;
+          border: 3px solid #2d2d2d;
+          background: transparent;
+          font-family: "Press Start 2P", cursive;
+          padding: 0.5rem 0 0.5rem 0.5rem;
+          margin: 0 0.5rem;
+        `}
+        name="limit"
+        id="limit"
+        onChange={changeLimit}
+        value={limit}
+      >
+        <option value={20}>20</option>
+        <option value={50}>50</option>
+        <option value={100}>100</option>
+      </select>
+      Pokemons per page
       <div
         className={css`
           float: right;
