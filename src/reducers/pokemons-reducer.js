@@ -12,7 +12,7 @@ const pokemons = (pokemons = {}, action) => {
         const id = currentPokemon.url.split("/");
         pokemons[currentPokemon.name] = {
           ...currentPokemon,
-          img: `https://pokeres.bastionbot.org/images/pokemon/${id[6]}.png`,
+          img: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id[6]}.png`,
           id: id[6],
         };
         return pokemons;

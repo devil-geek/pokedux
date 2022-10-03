@@ -21,14 +21,12 @@ export const prevPage = () => {
 export const isLoading = () => {
   return {
     type: LOADING,
-    payload: { loading: true },
   };
 };
 
 export const isLoaded = () => {
   return {
     type: LOADED,
-    payload: { loading: false },
   };
 };
 

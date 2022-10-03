@@ -35,14 +35,14 @@ const pages = (
   if (action.type === LOADING) {
     return {
       ...pagination,
-      loading: action.payload.loading,
+      loading: true,
     };
   }
 
   if (action.type === LOADED) {
     return {
       ...pagination,
-      loading: action.payload.loading,
+      loading: false,
     };
   }
 
