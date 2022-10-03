@@ -8,7 +8,8 @@
     "format": "prettier \"src/**/*.{js,html}\" --write",
     "lint": "eslint \"src/**/*.{js,jsx}\" --quiet",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "deploy": "npm run build && cp ./_redirects ./dist/_redirects"
   },
   "keywords": [],
   "author": "",
