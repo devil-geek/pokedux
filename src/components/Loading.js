@@ -6,16 +6,16 @@ const shake = keyframes`
       transform: translate(0, 0) rotate(0);
     }
     20% {
-      transform: translate(-10px, 0) rotate(-20deg);
+      transform: translate(-1rem, 0) rotate(-20deg);
     }
     30% {
-      transform: translate(10px, 0) rotate(20deg);
+      transform: translate(1rem, 0) rotate(20deg);
     }
     50% {
-      transform: translate(-10px, 0) rotate(-10deg);
+      transform: translate(-1rem, 0) rotate(-10deg);
     }
     60% {
-      transform: translate(10px, 0) rotate(10deg);
+      transform: translate(1rem, 0) rotate(10deg);
     }
     100% {
       transform: translate(0, 0) rotate(0);
@@ -24,8 +24,8 @@ const shake = keyframes`
 
 const pokeball = css`
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 10rem;
+  height: 10rem;
   background: linear-gradient(
     to bottom,
     red 45%,
@@ -34,19 +34,20 @@ const pokeball = css`
     white 55%,
     white 100%
   );
-  border: 5px solid #2d2d2d;
+  border: 0.5rem solid #2d2d2d;
   border-radius: 100%;
-  box-shadow: 0px 0px 3px black;
+  box-shadow: 0 0 0.3rem black;
+  margin: 2rem auto;
   animation: ${shake} 1.25s cubic-bezier(0.36, 0.07, 0.19, 0.97) infinite;
 
   .pokeball__button {
     position: absolute;
-    top: calc(50% - 15px);
-    left: calc(50% - 15px);
-    width: 30px;
-    height: 30px;
+    top: calc(50% - 1.5rem);
+    left: calc(50% - 1.5rem);
+    width: 3rem;
+    height: 3rem;
     background: whitesmoke;
-    border: 6px solid #000;
+    border: 0.6rem solid #000;
     border-radius: 50%;
     z-index: 10;
   }
@@ -63,6 +64,7 @@ const Loading = (props) => {
         height: 50vh;
         color: #8bc34a;
         flex-direction: column;
+        font-size: 1.4rem;
       `}
     >
       <div className={pokeball}>

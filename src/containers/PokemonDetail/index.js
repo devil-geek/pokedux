@@ -1,13 +1,62 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Redirect, navigate } from "@reach/router";
 import Loading from "../../components/Loading";
-import { Button, Controls } from "../../components/Pagination/styles";
+import {
+  Button,
+  Controls,
+  Line,
+  Lines,
+} from "../../components/Pagination/styles";
 import { DetailContainer, ScreenDetail, DetailImg, DetailInfo } from "./styles";
+
+function populateVoiceList() {
+  return new Promise(function (resolve) {
+    const synth = window.speechSynthesis;
+    let id;
+
+    id = setInterval(() => {
+      if (synth.getVoices().length !== 0) {
+        resolve(synth.getVoices());
+        clearInterval(id);
+      }
+    }, 10);
+  });
+}
+
+const pokedexVoice = async (pokemon) => {
+  if (pokemon && pokemon.details) {
+    if ("speechSynthesis" in window) {
+      const voices = await populateVoiceList();
+      const msg = new SpeechSynthesisUtterance();
+      const voice = voices.find(
+        (v) => v.name === "Google español de Estados Unidos"
+      );
+      if (voice) {
+        msg.voice = voice;
+        msg.volume = 1; // From 0 to 1
+        msg.rate = 1; // From 0.1 to 10
+        msg.pitch = 0.3; // From 0 to 2
+        msg.text = `${pokemon.name}, type: ${pokemon.details.types
+          .map((type) => type.type.name)
+          .join(", ")}`;
+        msg.lang = "en";
+        speechSynthesis.speak(msg);
+      }
+    } else {
+      // Speech Synthesis Not Supported 😣
+      alert("Sorry, your browser doesn't support text to speech!");
+    }
+  }
+};
 
 const PokemonDetail = ({ id }) => {
   const pokemons = useSelector((state) => state.pokemons);
   const pokemon = pokemons[id];
+
+  useEffect(() => {
+    pokedexVoice(pokemon);
+  }, [pokemon]);
 
   if (!pokemon) {
     return <Redirect noThrow to="/" />;
@@ -62,7 +111,12 @@ const PokemonDetail = ({ id }) => {
       </ScreenDetail>
       <Controls>
         <Button onClick={() => navigate("/")}>{"<"}</Button>
-        <span>Return</span>
+        <span>Return to list</span>
+        <Lines>
+          <Line />
+          <Line />
+          <Line />
+        </Lines>
       </Controls>
     </div>
   );

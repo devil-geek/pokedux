@@ -40,12 +40,13 @@ const Pagination = () => {
       <Button disabled={currentPage === numPages} onClick={next}>
         {">"}
       </Button>
+
       <Select name="limit" id="limit" onChange={changeLimit} value={limit}>
         <option value={20}>20</option>
         <option value={50}>50</option>
         <option value={100}>100</option>
       </Select>
-      Pokemons per page
+
       <Lines>
         <Line />
         <Line />

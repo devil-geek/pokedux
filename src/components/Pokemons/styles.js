@@ -3,10 +3,10 @@ import styled from "@emotion/styled";
 export const Grid = styled.div`
   display: grid;
   visibility: ${(props) => (props.loading === "true" ? "hidden" : "visible")};
-  grid-template-columns: repeat(auto-fill, minmax(8rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(12.8rem, 1fr));
   grid-auto-rows: 1fr;
-  font-size: 0.7rem;
-  padding: 15px 10px;
+  font-size: 1.1rem;
+  padding: 1.5rem 1rem;
 
   &::before {
     content: "";
@@ -23,14 +23,14 @@ export const Grid = styled.div`
 `;
 
 export const Item = styled.button`
-  padding: 10px;
-  margin: 2px;
-  border-radius: 5px;
+  padding: 1rem;
+  margin: 0.2rem;
+  border-radius: 0.5rem;
   background: #32383c;
   text-align: center;
   cursor: pointer;
   font-family: "Press Start 2P", cursive;
-  font-size: 0.65rem;
+  font-size: 1.05rem;
   border: none;
   img {
     width: 100%;
@@ -38,6 +38,6 @@ export const Item = styled.button`
   }
   p {
     color: #fff;
-    margin: 18px 0 0;
+    margin: 1.8rem 0 0;
   }
 `;

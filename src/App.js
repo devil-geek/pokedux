@@ -10,13 +10,27 @@ const App = () => {
     <React.StrictMode>
       <Global
         styles={css`
-          * {
-            box-sizing: border-box;
+          *,
+          *::after,
+          *::before {
+            margin: 0;
+            padding: 0;
+            box-sizing: inherit;
+          }
+          html {
+            font-size: 62.5%;
+            @media only screen and (max-width: 75em) {
+              font-size: 56.25%;
+            }
+            @media only screen and (max-width: 56.25em) {
+              font-size: 50%;
+            }
           }
           body {
             padding: 0;
             margin: 0;
             background: #1d2225;
+            background: radial-gradient(#455057, #000000);
             font-family: "Press Start 2P", cursive !important;
           }
         `}

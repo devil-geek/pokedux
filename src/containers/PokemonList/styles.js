@@ -2,9 +2,9 @@ import styled from "@emotion/styled";
 
 export const ScreenList = styled.div`
   background: #1d2225;
-  margin: 30px 40px 50px;
-  border-radius: 30px;
+  margin: 3rem 4rem;
+  border-radius: 3rem;
   max-height: 50vh;
   overflow: auto;
-  box-shadow: inset 0 0 6px #2d2d2d;
+  box-shadow: inset 0 0 0.6rem #2d2d2d;
 `;
